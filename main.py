@@ -6,8 +6,26 @@ import pandas as pd
 
 
 data=fetch_openml(name='autoMpg', version=3, as_frame=True)
-features = list(df.columns)
+
+print(data.DESCR)
+
+df = data.frame
+
+df.sample(9)
+
+df.describe()
+
+df.dtypes
+
+features = df.columns
+print(features)
 selected_features =['Acceleration','Horse_power']
+
+features = list(df.columns)
+print("Available features:", features)
+
+print("Selected features: ", selected_features)
+
 fig, axs  = plt.subplots(1, len(selected_features), figsize = (16,3))
 
 for ax, f in zip(axs, selected_features):
@@ -25,12 +43,8 @@ for ax, f in zip(axs, selected_features):
 
 plt.show()
 
-
-
-
-
-reference_feature = selected_features[1]  
-comparison_feature = selected_features[0] 
+reference_feature = selected_features[1]
+comparison_feature = selected_features[0]
 
 plt.figure(figsize=(8, 6))
 plt.scatter(df[reference_feature], df[comparison_feature], alpha=0.6)
@@ -41,4 +55,3 @@ plt.ylabel(comparison_feature)
 plt.savefig('correlation_plot.png')
 
 plt.show()
-
